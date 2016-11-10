@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>d3webgl</title>
+	<script src="lib/three.js"></script>
+	<script src="../d3webgl.js"></script>
+	<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+	<div><h1>D3WebGL Tests</h1>
+	</div>
+	
+	<div id="canvases">
+		<div id="circles-div">
+			<h3>Circles</h3>
+		</div>
+		<div id="rect-div">
+			<h3>Rectangles</h3>
+		</div>
+		<div id="lines-div">
+			<h3>Lines</h3>
+		</div>
+	</div>
+	
+	<script>
+		var WIDTH = 300;
+		var HEIGHT = 300;
+		var ELEMENT_COUNT = 50;
+
+		var dataSet = new Array(ELEMENT_COUNT).fill(0);
+
+		// CIRCLES
+		var webgl = d3webgl.initWebGL('circles-div', WIDTH, HEIGHT);
+		var circles = webgl.selectAll()
+			.data(dataSet)
+			.append('circle')
+				.attr('x', () => Math.random() * WIDTH - WIDTH/2) 
+				.attr('y', () => Math.random() * -HEIGHT+ HEIGHT/2)
+				.attr('r', 5)
+				.style('fill', '#000000')
+				.style('opacity',  ()=>Math.random())
+
+		webgl.render();
+
+		// LINES
+		webgl = d3webgl.initWebGL('rect-div', WIDTH, HEIGHT);
+		var circles = webgl.selectAll()
+			.data(dataSet)
+			.append('rect')
+				.attr('x', () => Math.random() * WIDTH - WIDTH/2) 
+				.attr('y', () => Math.random() * -HEIGHT+ HEIGHT/2)
+				.attr('width', 20) 
+				.attr('height', 20)
+				.attr('r', 5)
+				.style('fill', '#000000')
+				.style('stroke', '#ff0000')
+				.style('opacity',  ()=>Math.random())
+
+		webgl.render();
+
+
+		// RECT
+		webgl = d3webgl.initWebGL('lines-div', WIDTH, HEIGHT);
+		var circles = webgl.selectAll()
+			.data(dataSet)
+			.append('line')
+				.attr('x1', () => Math.random() * WIDTH - WIDTH/2) 
+				.attr('y1', () => Math.random() * -HEIGHT+ HEIGHT/2)
+				.attr('x2', () => Math.random() * WIDTH - WIDTH/2) 
+				.attr('y2', () => Math.random() * -HEIGHT+ HEIGHT/2)
+				.style('stroke', '#000000')
+				.style('opacity',  ()=>Math.random())
+
+		webgl.render();
+
+
+
+	</script>
+
+</body>
+</html>
